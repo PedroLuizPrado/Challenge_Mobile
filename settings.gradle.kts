@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "OdontoPrevAap"
 include(":app")
 include(":app")
+include(":app")
