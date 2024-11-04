@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "OdontoPrevAap"
+rootProject.name = "Sprint02"
 include(":app")
-include(":app")
+ 
