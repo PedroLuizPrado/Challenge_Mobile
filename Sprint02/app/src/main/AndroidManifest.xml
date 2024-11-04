@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Sprint02"
         tools:targetApi="31">
         <activity
+            android:name=".Recompensas"
+            android:exported="false" />
+        <activity
+            android:name=".BetterTeeth"
+            android:exported="false" />
+        <activity
             android:name=".Home"
             android:exported="false" />
         <activity
