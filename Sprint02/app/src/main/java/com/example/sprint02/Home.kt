@@ -2,7 +2,7 @@ package com.example.sprint02
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sprint02.databinding.ActivityHomeBinding
 
@@ -18,10 +18,14 @@ class Home : AppCompatActivity() {
 
         // Receber o nome da Intent para personalizar a saudação
         val nome = intent.getStringExtra("nome") ?: "Usuário"
+        Log.d("HomeActivity", "Nome do usuário: $nome")
         binding.textSaudacao.text = "Olá, $nome"
 
         // Configuração dos listeners para os cards
+        setupCardListeners()
+    }
 
+    private fun setupCardListeners() {
         // Card BetterTeeth
         val betterTeethCard = binding.linearLayout
         betterTeethCard.setOnClickListener {

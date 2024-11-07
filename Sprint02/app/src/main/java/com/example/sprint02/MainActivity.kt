@@ -2,6 +2,7 @@ package com.example.sprint02
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sprint02.databinding.ActivityMainBinding
@@ -35,12 +36,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Verificar se o usuário está logado ao iniciar a MainActivity
         verificarUsuarioLogado()
     }
 
     private fun verificarUsuarioLogado() {
         val usuario = autenticacao.currentUser
         if (usuario != null) {
+            Log.d("MainActivity", "Usuário logado: ${usuario.email}")
             val firestore = FirebaseFirestore.getInstance()
             val usuarioId = usuario.uid
             firestore.collection("usuarios").document(usuarioId).get()
@@ -50,9 +53,16 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this, Home::class.java)
                         intent.putExtra("nome", nome)
                         startActivity(intent)
-                        finish()
+                        finish()  // Fecha a MainActivity para não voltar nela
+                    } else {
+                        Log.d("MainActivity", "Documento do usuário não encontrado")
                     }
                 }
+                .addOnFailureListener {
+                    Log.e("MainActivity", "Erro ao acessar o documento do usuário")
+                }
+        } else {
+            Log.d("MainActivity", "Nenhum usuário logado")
         }
     }
 

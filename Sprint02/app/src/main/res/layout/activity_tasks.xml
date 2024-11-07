@@ -5,15 +5,71 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/tela_tasks"
     tools:context=".Tasks">
 
+
+    <!-- Título -->
+
+    <!-- Campo de descrição da tarefa -->
+
+    <!-- Botão para adicionar a tarefa -->
+
     <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="1048dp"
-        android:layout_height="1039dp"
+        android:id="@+id/imageView"
+        android:layout_width="123dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="212dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tela_tasks" />
+        app:srcCompat="@drawable/icon_checklist" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Adicionar Tarefa"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/editTextTarefa"
+        android:layout_width="387dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/edittext_background"
+        android:hint="Digite a descrição da tarefa"
+        android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <Button
+        android:id="@+id/buttonAdicionarTarefa"
+        android:layout_width="336dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="64dp"
+        android:backgroundTint="#0065FD"
+        android:shadowColor="#0065FD"
+        android:text="Adicionar Tarefa"
+        android:textColor="@android:color/white"
+        android:textColorHighlight="#0065FD"
+        android:textColorHint="#0065FD"
+        android:textColorLink="#0065FD"
+        app:circularflow_defaultRadius="16dp"
+        app:circularflow_radiusInDP="16dp"
+        app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTarefa"
+        app:rippleColor="#0065FD"
+        app:strokeColor="#0065FD" />
 </androidx.constraintlayout.widget.ConstraintLayout>
