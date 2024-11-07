@@ -78,8 +78,8 @@
             android:id="@+id/linearLayout"
             android:layout_width="179dp"
             android:layout_height="192dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="240dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="56dp"
             android:background="@drawable/card_background_gray"
             android:orientation="vertical"
             android:padding="16dp"
@@ -116,7 +116,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="179dp"
             android:layout_height="192dp"
-            android:layout_marginBottom="240dp"
+            android:layout_marginBottom="56dp"
             android:background="@drawable/card_background"
             android:orientation="vertical"
             android:padding="16dp"
@@ -245,14 +245,26 @@
             android:id="@+id/textDescricao"
             android:layout_width="261dp"
             android:layout_height="34dp"
+            android:layout_marginTop="52dp"
             android:fontFamily="@font/poppins_light"
             android:text="O que você gostaria de fazer hoje?"
             android:textColor="#848790"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textSaudacao" />
+
+        <ImageView
+            android:id="@+id/btnLogout"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.88"
+            app:layout_constraintStart_toEndOf="@+id/textSaudacao"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_logout_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

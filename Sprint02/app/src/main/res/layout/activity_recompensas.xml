@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".Recompensas">
 
+    <ImageView
+        android:id="@+id/btnVoltar2"
+        android:layout_width="50dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="688dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_house_24" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="305dp"

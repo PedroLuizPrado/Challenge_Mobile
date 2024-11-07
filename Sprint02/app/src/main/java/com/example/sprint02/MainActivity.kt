@@ -44,25 +44,12 @@ class MainActivity : AppCompatActivity() {
         val usuario = autenticacao.currentUser
         if (usuario != null) {
             Log.d("MainActivity", "Usuário logado: ${usuario.email}")
-            val firestore = FirebaseFirestore.getInstance()
-            val usuarioId = usuario.uid
-            firestore.collection("usuarios").document(usuarioId).get()
-                .addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        val nome = document.getString("nome") ?: "Usuário"
-                        val intent = Intent(this, Home::class.java)
-                        intent.putExtra("nome", nome)
-                        startActivity(intent)
-                        finish()  // Fecha a MainActivity para não voltar nela
-                    } else {
-                        Log.d("MainActivity", "Documento do usuário não encontrado")
-                    }
-                }
-                .addOnFailureListener {
-                    Log.e("MainActivity", "Erro ao acessar o documento do usuário")
-                }
+            // Redirecionar para a Home diretamente se o usuário estiver logado
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
+            finish()  // Fecha a MainActivity para não voltar nela
         } else {
-            Log.d("MainActivity", "Nenhum usuário logado")
+            Log.d("MainActivity", "Nenhum usuário logado.")
         }
     }
 
@@ -72,9 +59,14 @@ class MainActivity : AppCompatActivity() {
 
         autenticacao.signInWithEmailAndPassword(email, senha)
             .addOnSuccessListener {
-                verificarUsuarioLogado()
+                Log.d("MainActivity", "Login bem-sucedido.")
+                // Redirecionar para a Home diretamente após o login bem-sucedido
+                val intent = Intent(this, Home::class.java)
+                startActivity(intent)
+                finish()  // Fecha a MainActivity para não voltar nela
             }
-            .addOnFailureListener {
+            .addOnFailureListener { exception ->
+                Log.e("MainActivity", "Erro no login: ${exception.message}")
                 AlertDialog.Builder(this)
                     .setTitle("Erro")
                     .setMessage("Verificar e-mail ou senha")
