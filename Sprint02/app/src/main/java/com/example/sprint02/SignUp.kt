@@ -41,10 +41,10 @@ class SignUp : AppCompatActivity() {
 
     private fun cadastrarUsuario() {
         // Obtém os dados inseridos nos campos de entrada
-        val nome = binding.NomeEditText.text.toString()
-        val email = binding.emailEditText.text.toString()
-        val senha = binding.editSenha.text.toString()
-        val confirmarSenha = binding.EditConfirmarSenha.text.toString()
+        val nome = binding.NomeEditText.text.toString().trim()
+        val email = binding.emailEditText.text.toString().trim()
+        val senha = binding.editSenha.text.toString().trim()
+        val confirmarSenha = binding.EditConfirmarSenha.text.toString().trim()
 
         // Valida se as senhas coincidem
         if (senha != confirmarSenha) {
@@ -69,22 +69,22 @@ class SignUp : AppCompatActivity() {
                     "nome" to nome,
                     "email" to email
                 )
-                firestore.collection("usuarios").document(id!!).set(usuario)
+                if (id != null) {
+                    firestore.collection("usuarios").document(id).set(usuario)
+                }
 
                 // Exibe um Toast de sucesso
                 Toast.makeText(this, "Cadastro realizado com sucesso!", Toast.LENGTH_LONG).show()
 
-                // Redireciona para a tela de login (MainActivity ou LoginActivity)
-                val intent = Intent(this, MainActivity::class.java) // ou LoginActivity, conforme seu fluxo
+                // Redireciona para a Home, passando o nome do usuário
+                val intent = Intent(this, Home::class.java)
+                intent.putExtra("nome", nome)
                 startActivity(intent)
-
-                // Finaliza a tela de cadastro, para que o usuário não consiga voltar
-                finish()
+                finish()  // Finaliza a tela de cadastro para evitar retorno
             }
             .addOnFailureListener { exception ->
                 val mensagemErro = exception.message
-                // Exibe um Toast de erro
-                Toast.makeText(this, "Erro ao criar conta: ${mensagemErro}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Erro ao criar conta: $mensagemErro", Toast.LENGTH_LONG).show()
             }
     }
 }
