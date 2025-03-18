@@ -23,7 +23,7 @@ Sprint03 é um aplicativo mobile desenvolvido para auxiliar os usuários na veri
 - **Navegação Dinâmica** - Interface fluida para alternância entre as telas do aplicativo.
 
 ## **Diagrama de Arquitetura**
-![Diagrama de Arquitetura](arquitetura.png)
+![Diagrama de Arquitetura](Diagrama.png)
 
 ## **Estrutura de Pastas**
 ```
