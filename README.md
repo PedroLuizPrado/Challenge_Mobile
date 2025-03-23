@@ -60,10 +60,12 @@ Para rodar o projeto localmente, siga os passos abaixo:
 ```bash
    expo start
 ```
-4. Para rodar no seu celular, utilize o app Expo Go e escaneie o QR Code exibido, utilize o 
-email:gabi@gmail.com
-senha: 123456 para entrar no app .
+4. Para rodar no seu celular, utilize o app Expo Go e escaneie o QR Code exibido, utilize: 
 
+```
+email:gabi@gmail.com
+senha: 123456 para entrar no app 
+```
 
 
 ## **Considerações Finais**
