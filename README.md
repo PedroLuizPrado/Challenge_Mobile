@@ -60,7 +60,11 @@ Para rodar o projeto localmente, siga os passos abaixo:
 ```bash
    expo start
 ```
-4. Para rodar no seu celular, utilize o app Expo Go e escaneie o QR Code exibido.
+4. Para rodar no seu celular, utilize o app Expo Go e escaneie o QR Code exibido, utilize o 
+email:gabi@gmail.com
+senha: 123456 para entrar no app .
+
+
 
 ## **Considerações Finais**
 Este projeto foi desenvolvido para a disciplina de **Mobile App Development**, atendendo aos requisitos de construção de um aplicativo funcional com pelo menos cinco telas, integração com APIs e boas práticas de desenvolvimento.
