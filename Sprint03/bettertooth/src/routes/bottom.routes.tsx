@@ -6,6 +6,7 @@ import Home from '../pages/home';
 import Task from '../pages/task';
 import Recompensas from '../pages/recompensas';
 import Betterteeth from '../pages/betterteeth';
+import TaskStack from './TaskStack';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -40,7 +41,7 @@ export default function BottomRoutes() {
       })}
     >
       <Tab.Screen name="HomeStack" component={HomeStack} options={{ title: "Home" }} />
-      <Tab.Screen name="Tasks" component={Task} />
+      <Tab.Screen name="Tasks" component={TaskStack} />
     </Tab.Navigator>
   );
 }
