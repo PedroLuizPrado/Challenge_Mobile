@@ -1,9 +1,8 @@
 export type RootStackParamList = {
-    Login: undefined;
-    BottomRoutes: undefined;
-    Home: undefined;
-    Recompensas: undefined;
-    Betterteeth: undefined;
-    Tasks: undefined;
-  };
-  
+  Login: undefined;
+  Cadastro: undefined;
+  BottomRoutes: undefined;
+  Recompensas: undefined;
+  Betterteeth: undefined;
+  Tasks: undefined;
+};

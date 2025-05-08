@@ -4,13 +4,16 @@ import {
   View,
   Image,
   TextInput,
-  Alert
+  Alert,
+  TouchableOpacity,
 } from "react-native";
 import { styles } from "./styles";
 import Logo from "../../assets/logo.png";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
-import { auth } from "../../../firebase";
+import { auth, db } from "../../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "../../components/Button";
 
 export default function Login() {
@@ -25,8 +28,16 @@ export default function Login() {
     }
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigation.navigate("BottomRoutes"); // Redireciona para Home
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const uid = userCredential.user.uid;
+
+      const userDoc = await getDoc(doc(db, "users", uid));
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+        await AsyncStorage.setItem("@usuario_nome", data.nome); // ✅ nome salvo local
+      }
+
+      navigation.navigate("BottomRoutes"); // ✅ redireciona para Home
     } catch (error: any) {
       console.error("Erro ao fazer login:", error.message);
       Alert.alert("Erro", "E-mail ou senha incorretos!");
@@ -59,14 +70,15 @@ export default function Login() {
       </View>
 
       <View style={styles.boxBottom}>
-        {/* Seu botão estilizado agora chama handleLogin corretamente */}
         <Button text="Login" onPress={handleLogin} />
       </View>
 
       <Text style={styles.textFotter}>
-        Ainda não tem uma conta?{" "}
-        <Text style={styles.colorFotter}>Faça cadastro</Text>
+       Ainda não tem uma conta?{" "}
+  <Text style={styles.colorFotter} onPress={() => navigation.navigate("Cadastro")}>
+    Faça cadastro
       </Text>
+  </Text>
     </View>
   );
 }

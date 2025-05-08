@@ -3,6 +3,7 @@ import { View, FlatList, Text, TouchableOpacity, Alert } from 'react-native';
 import { styles } from './styles';
 import { Octicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { db } from '../../../firebase';
 import {
   collection,
@@ -20,30 +21,49 @@ interface Task {
 export default function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const navigation = useNavigation<any>();
-  const isFocused = useIsFocused(); // ✅ Verifica se a tela está visível
+  const isFocused = useIsFocused();
 
-  const loadTasks = async () => {
-    const querySnapshot = await getDocs(collection(db, 'tasks'));
-    const list = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data()
-    })) as Task[];
-    setTasks(list);
+  // ✅ Carrega do AsyncStorage antes de tudo
+  const loadCachedTasks = async () => {
+    try {
+      const cached = await AsyncStorage.getItem('@tarefas');
+      if (cached) {
+        setTasks(JSON.parse(cached));
+      }
+    } catch (error) {
+      console.log('Erro ao carregar cache:', error);
+    }
   };
 
+  // ✅ Carrega do Firebase e salva no AsyncStorage
+  const loadTasks = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'tasks'));
+      const list = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Task[];
+      setTasks(list);
+      await AsyncStorage.setItem('@tarefas', JSON.stringify(list)); // ✅ salvar no cache
+    } catch (error) {
+      console.log('Erro ao carregar tarefas do Firebase:', error);
+    }
+  };
+
+  // ✅ Deleta e sincroniza cache
   const handleDelete = async (id: string) => {
     try {
       await deleteDoc(doc(db, 'tasks', id));
-      loadTasks();
+      await loadTasks(); // recarrega e atualiza cache
     } catch (error) {
       Alert.alert('Erro ao deletar tarefa');
     }
   };
 
-  // ✅ Recarrega toda vez que a tela for exibida
   useEffect(() => {
     if (isFocused) {
-      loadTasks();
+      loadCachedTasks(); // mostra rápido do cache
+      loadTasks();       // sincroniza com Firebase
     }
   }, [isFocused]);
 
@@ -59,12 +79,7 @@ export default function Tasks() {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.taskCard}
-            onLongPress={() =>
-              Alert.alert('Deletar', 'Deseja remover esta tarefa?', [
-                { text: 'Cancelar', style: 'cancel' },
-                { text: 'Sim', onPress: () => handleDelete(item.id) },
-              ])
-            }
+            onPress={() => navigation.navigate('EditarTarefa', { taskId: item.id })}
           >
             <Octicons name="checklist" size={20} color="#4A4A4A" />
             <View>
@@ -75,7 +90,6 @@ export default function Tasks() {
         )}
       />
 
-      {/* ✅ Botão Flutuante com ícone real branco */}
       <TouchableOpacity
         onPress={() => navigation.navigate('NovaTarefa')}
         style={{
