@@ -8,7 +8,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -16,7 +16,7 @@ import { auth, db } from '../../../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { stylesCadastro as styles } from './stylesCadastro';
-import LogoBranca from '../../assets/logobranca.png';
+import LogoBranca from '../../assets/logobranca.png'; // ✅ Logo
 
 export default function Cadastro() {
   const navigation = useNavigation<any>();
@@ -32,40 +32,33 @@ export default function Cadastro() {
       return;
     }
 
+    if (senha.length < 6) {
+      Alert.alert('Erro', 'A senha deve ter pelo menos 6 caracteres!');
+      return;
+    }
+
     if (senha !== confirmarSenha) {
       Alert.alert('Erro', 'As senhas não coincidem!');
       return;
     }
 
-    if (senha.length < 6) {
-      Alert.alert('Erro', 'A senha deve conter no mínimo 6 caracteres!');
-      return;
-    }
-
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email.trim().toLowerCase(),
-        senha
-      );
+      console.log('Tentando cadastrar com:', email, senha);
 
+      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
       const user = userCredential.user;
 
       await setDoc(doc(db, 'users', user.uid), {
         nome,
-        email: email.trim().toLowerCase(),
+        email,
       });
 
       await AsyncStorage.setItem('@usuario_nome', nome);
-      Alert.alert('Conta criada com sucesso!');
-      
-      // Redireciona direto para o app logado
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'BottomRoutes' }]
-      });
 
+      Alert.alert('Conta criada com sucesso!');
+      navigation.navigate('Login');
     } catch (error: any) {
+      console.error('Erro ao criar conta:', error);
       Alert.alert('Erro ao criar conta', error.message);
     }
   };
@@ -89,7 +82,7 @@ export default function Cadastro() {
           style={styles.textinput}
         />
         <TextInput
-          placeholder="email"
+          placeholder="Email"
           value={email}
           onChangeText={setEmail}
           style={styles.textinput}
@@ -103,7 +96,7 @@ export default function Cadastro() {
           secureTextEntry
         />
         <TextInput
-          placeholder="Confirme Sua senha"
+          placeholder="Confirme sua senha"
           value={confirmarSenha}
           onChangeText={setConfirmarSenha}
           style={styles.textinput}

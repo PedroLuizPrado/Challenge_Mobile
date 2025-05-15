@@ -19,16 +19,16 @@ export const stylesCadastro = StyleSheet.create({
     height: Dimensions.get('window').height * 0.1,
     width: Dimensions.get('window').width * 0.4,
     resizeMode: 'contain',
-    marginTop: 40, // adicionado espaçamento
+    marginTop: 40, // Espaçamento extra para centralizar melhor
   },
 
   boxMid: {
     flex: 1,
     backgroundColor: '#fff',
-    marginTop: -40,
+    marginTop: -40, // Sobreposição para visual moderno
     borderTopLeftRadius: 40,
     paddingHorizontal: 30,
-    paddingTop: 40, // aumentado para dar espaço ao texto
+    paddingTop: 40, // Espaço extra entre logo e título
   },
 
   text1: {
