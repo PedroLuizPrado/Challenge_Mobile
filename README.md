@@ -1,7 +1,7 @@
 # Sprint03 - Mobile App Development
 
 ## **Descrição do Projeto**
-Sprint03 é um aplicativo mobile desenvolvido para auxiliar os usuários na verificação da qualidade do sorriso, gerenciamento de tarefas diárias e obtenção de recompensas. O projeto visa oferecer uma interface intuitiva e recursos modernos para engajamento dos usuários.
+Sprint03 é um aplicativo mobile desenvolvido para auxiliar os usuários na verificação da qualidade do sorriso, gerenciamento de tarefas diárias e obtenção de recompensas. O projeto visa oferecer uma interface intuitiva e recursos modernos para engajamento dos usuários vale lembrar que ele foi devidamente atualizado com as exigências da SPRINT04 então rode o arquivo SPRINT03/bettertooth que você encontrará todas as exigências no projeto .
 
 ## **Equipe de Desenvolvimento**
 - **Murilo Ferreira Ramos** - RM553315  
